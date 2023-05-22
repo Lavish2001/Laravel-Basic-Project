@@ -115,6 +115,7 @@ class PostController extends Controller
     function allPosts(Request $req){
         $user = $req->session()->get('user');
         $posts = Post::where(['owner_id' => $user->id])->paginate(2);
+        // $posts = Post::with('post_comment')->where('owner_id', $user->id)->paginate(2);
         return response()->json(['status' => 'RXSUCCESS', 'data' => $posts], 200);
     }
 }
