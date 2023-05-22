@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Mail;
 
 class UserController extends Controller
 {
@@ -116,4 +117,22 @@ class UserController extends Controller
         return response()->json(['status' => 'RXSUCCESS', 'message' => 'Account deactivated.'], 200);
     }
 
+
+
+    
+    // USER FORGOT PASSWORD //
+function forgot(Request $request){
+    $email = $request->email; // Get the email from the request
+    
+    // Mail::send('welcome', ['token' => 'zxcvbnm'], function ($message) use ($email) {
+    //     $message->to($email);
+    //     $message->subject('Reset Password');
+    // });
+    Mail::raw('This is a test email.', function ($message) use ($email) {
+        $message->to($email);
+        $message->subject('Test Email');
+    });
+
+    return response()->json(['status' => 'RXSUCCESS', 'message' => 'Email Sent.'], 200);
+}
 }

@@ -19,6 +19,7 @@ class VerifyCsrfToken extends Middleware
         "/deactivate_account",
         "/upload",
         "/delete",
-        "/comment"
+        "/comment",
+        "/forgot_password"
     ];
 }

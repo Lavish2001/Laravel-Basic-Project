@@ -14,7 +14,7 @@ class PostController extends Controller
     // UPLOAD USER POST //
     function upload(Request $req){
         if($req->hasFile('image')){
-            if($req->file('image')->getClientOriginalExtension()=='webp' || $req->file('image')->getClientOriginalExtension()=='jpg'|| $req->file('image')->getClientOriginalExtension()=='jpeg'){
+            if($req->file('image')->getClientOriginalExtension() == 'webp' || $req->file('image')->getClientOriginalExtension() == 'jpg' || $req->file('image')->getClientOriginalExtension() == 'jpeg'){
                 $currentDateTime = Carbon::now()->format('YmdHis');
                 $filename = $currentDateTime. "-" .$req->file('image')->getClientOriginalName();
                 $req->file('image')->storeAs('Posts', $filename);
@@ -105,6 +105,16 @@ class PostController extends Controller
     function all(Request $req){
         $user = $req->session()->get('user');
         $users = User::with('user_post.post_comment')->find($user->id);
-        return response()->json(['status' => 'RXERROR', 'data' => $users], 400);
+        return response()->json(['status' => 'RXSUCCESS', 'data' => $users], 200);
+    }
+
+
+
+
+    // USER ALL POSTS //
+    function allPosts(Request $req){
+        $user = $req->session()->get('user');
+        $posts = Post::where(['owner_id' => $user->id])->paginate(2);
+        return response()->json(['status' => 'RXSUCCESS', 'data' => $posts], 200);
     }
 }

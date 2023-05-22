@@ -46,6 +46,10 @@ Route::patch('/change_password',[UserController::class,'ChangePassword'])->middl
 Route::delete('/deactivate_account',[UserController::class,'DeactivateAccount'])->middleware(UserAuth::class);
 
 
+// USER  FORGOT PASSWORD //
+Route::post('/forgot_password',[UserController::class,'forgot']);
+
+
 
 
 //----Post Routes-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
@@ -62,6 +66,10 @@ Route::delete('/delete',[PostController::class,'delete'])->middleware(UserAuth::
 
 // USER LIVE POST //
 Route::get('/Images/{name}',[PostController::class,'live']);
+
+
+// USER ALL POSTS //
+Route::get('/all_posts',[PostController::class,'allPosts'])->middleware(UserAuth::class);
 
 
 // COMMENT ON POST //

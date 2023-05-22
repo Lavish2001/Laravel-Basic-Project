@@ -25,5 +25,6 @@ class User extends Model
     public function user_post()
     {
         return $this->hasMany(Post::class, 'owner_id');
+        // return $this->hasManyThrough(Post::class, Comment::class, 'user_id', 'id', 'id', 'post_id');
     }
 }
