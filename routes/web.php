@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Resourse;
 use App\Http\Middleware\UserAuth;
 use App\Http\Middleware\UserLog;
 
@@ -28,6 +29,10 @@ Route::get('/home', function () {
 
 // USER SIGNUP //
 Route::post('/signup',[UserController::class,'signup'])->middleware(UserLog::class);
+
+
+// RESOURSE ROUTING //
+// Route::resource('/user',Resourse::class);
 
 
 // USER LOGIN //

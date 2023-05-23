@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Comment;
 use Illuminate\Support\Facades\Validator;
+use App\Helpers\Helper;
 
 class PostController extends Controller
 {
@@ -21,12 +22,14 @@ class PostController extends Controller
 
                 // Get user from session
                 $user = $req->session()->get('user');
+
+                $description = Helper::myCustomFunction($req->input('description'));
                 
                 // Upload a post 
                 $post = Post::create([
                     'owner_id' => $user->id,
                     'image' => $filename,
-                    'description' => $req->input('description') ? $req->input('description') : ""
+                    'description' => $description
                 ]);
                 return response()->json(['status' => 'RXSUCCESS', 'message' => 'File Uploaded.' ], 200);
             }else{
